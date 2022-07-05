@@ -13,7 +13,7 @@ function useValidation({}) {
     
         setInputValue({...inputValue, [name]:value});
         setError({...error, [name]: target.validationMessage});
-        setFormIsValid(target.closest('.edit-form').checkValidity());
+        setFormIsValid(target.closest('.form').checkValidity());
     }
  
     return {inputValue, error, formIsValid, setInputValue, setError, setFormIsValid, handleInputsChanges};

@@ -12,7 +12,7 @@ function PopupWithForm({isOpen, name, title, children, onClose, buttonTitle, but
     <>  
         <div className={`pop-up popup_type_${name} ${isOpen && "pop-up_opened"}`} onClick={handleOverlayClick}>
             <div className="pop-up__container">        
-                <form className="edit-form" name={name} onSubmit={onSubmit} noValidate>
+                <form className="edit-form form" name={name} onSubmit={onSubmit} noValidate>
                     <button className="pop-up__close popup-edit__close-button" onClick={onClose} type="button"></button>
                     <h2 className="edit-form__title">{title}</h2>
                     <fieldset className="edit-form__area">

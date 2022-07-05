@@ -1,0 +1,11 @@
+.tooltip__wrapper{
+    width: 430px;
+    background-color: white;
+    border-radius: 2.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    text-align: center;
+}

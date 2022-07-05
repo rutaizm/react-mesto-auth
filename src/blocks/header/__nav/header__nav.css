@@ -1,0 +1,5 @@
+.header__nav{
+    align-self: center;
+    display: flex;
+    align-items:baseline;
+}

@@ -1,22 +1,21 @@
 import React from "react";
 import SigninForm from "./SigninForm";
-import { Link } from "react-router-dom";
 import useValidation from "../hooks/useValidation";
 
-function Register({onRegistration}) {
+function Login({onLogin}) {
 
     const {inputValue, error, formIsValid, setInputValue, setError, setFormIsValid, handleInputsChanges} = useValidation({});
 
     function handleSubmit(event) {
         event.preventDefault();
-        onRegistration(inputValue);
+        onLogin(inputValue);
     }
     
     return(
-    <div className="signin__wrapper">   
+    <>   
         <SigninForm
-            title="Регистрация"
-            buttonTitle="Зарегистрироваться"
+            title="Вход"
+            buttonTitle="Войти"
             onSubmit={handleSubmit}
             isValid={formIsValid}
         >
@@ -54,13 +53,9 @@ function Register({onRegistration}) {
             "edit-form__input-error edit-form__input-error_active" :"edit-form__input-error"}>
             {error.password}
         </span>
-        </SigninForm>     
-          <div className="signin__register">
-          <p>Уже зарегистрированы? </p>
-          <Link to="/sign-in" className="signin__link">Войти</Link>
-        </div> 
-    </div>          
+        </SigninForm>    
+    </>          
     )
 }
 
-export default Register
+export default Login;

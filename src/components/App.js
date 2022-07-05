@@ -9,22 +9,27 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import PopupWithConfirmation from './PopupWithConfirmation';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import Register from './Register';
 import auth from '../utils/Auth';
+import Login from './Login';
+import InfoTooltip from './InfoTooltip';
 
 function App() {
+    const history = useHistory();
 
     const [loggedIn, setLoggedIn] = React.useState(false);
-
+    
     const [currentUser, setCurrentUser] = React.useState({});
     const [cards, setCards] = React.useState([]);
+    const [userEmail, setUserEmail] = React.useState('');
 
     const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
     const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] =React.useState(false);
     const [isConfirmationPopupOpen, setConfirmationPopupOpen] = React.useState(false);
+    const [isInfoTooltipOpen, setInfoToolTip] = React.useState(false);
     
     
     const [selectedCard, setSelectedCard] = React.useState({});
@@ -50,6 +55,10 @@ function App() {
         setImagePopupOpen(true);
     }
 
+    function handleTooltip() {
+        setInfoToolTip(true)
+    }
+
     function onCardConfirmDelete(card) {
         setDeleteCard(card);
         setConfirmationPopupOpen(true);
@@ -63,23 +72,46 @@ function App() {
         setImagePopupOpen(false);
         setSelectedCard({});
         setConfirmationPopupOpen(false);
+        setInfoToolTip(false);
     }
 
-    function handleRegistration(password, email) {
-        auth.register(password, email)
-        .then((response) => {
-            try {
-              if (response.status === 200){
-                return response.json();
-              }
-            } catch(e){
-              return (e)
-            }
-          })
-          .then((res) => {
-            return res;
-          })
-          .catch((err) => console.log(err));        
+    function handleRegistration(data) {
+        auth.register(data.password, data.email)
+            .then((data) => {
+                setLoggedIn(true);
+                history.push("/");
+            })
+            .catch((err) => console.log(err));        
+    }
+
+    function handleLogin(data){
+        auth.login(data.password, data.email)
+            .then((data) =>{
+                setLoggedIn(true);
+                localStorage.setItem('jwt', data.token);
+                handleTooltip();
+                history.push("/");
+            })
+            .catch((err) => console.log(err));       
+    }
+
+    function handleCheckToken() {
+        const token = localStorage.getItem('jwt');
+        if (token) {
+            auth.checkToken(token)
+                .then((data) => {
+                    setUserEmail(data.data.email);
+                    setLoggedIn(true);
+                    history.push("/");                    
+                })
+                .catch((err) => console.log(err)); 
+        }
+    }
+
+    function handleLogout() {
+        setLoggedIn(false);
+        localStorage.removeItem('jwt');
+        history.push("/sign-in");
     }
 
     function handleUpdateUser(user) {
@@ -155,6 +187,10 @@ function App() {
     }
 
     React.useEffect(() => {
+        handleCheckToken();
+    }, [loggedIn]);
+
+    React.useEffect(() => {
         Promise.all([
             api.getProfileInfo(),
             api.getInitialCards()
@@ -172,18 +208,25 @@ function App() {
 return (
     <CurrentUserContext.Provider value={currentUser}>  
         <div className="page__content">
-        <Header />
+        <Header 
+            loggedIn={loggedIn}
+            userEmail={userEmail}
+            onLogout={handleLogout}
+        />
         <Switch>
             <Route path="/sign-up">
                 <Register 
                     onRegistration={handleRegistration}
                 />
             </Route>
-            {/* <Route path="/sign-in">
-                <Login />
-            </Route> */}
+            <Route path="/sign-in">
+                <Login 
+                    onLogin={handleLogin}
+                />
+            </Route>
             <ProtectedRoute
-                exact path="/"
+                path="/"
+                loggedIn={loggedIn}
                 component={Main}
                 cards={cards}
                 onEditProfile = {handleEditProfileClick}
@@ -220,7 +263,11 @@ return (
             onClose={closeAllPopups}            
             renderLoading={renderLoading}
             onSubmit={handleCardDelete}
-        />    
+        />
+        <InfoTooltip
+            isOpen={isInfoTooltipOpen}
+            onClose={closeAllPopups} 
+        /> 
         </div>
     </CurrentUserContext.Provider>
   );
