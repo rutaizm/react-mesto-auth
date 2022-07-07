@@ -20,6 +20,7 @@ function App() {
     const history = useHistory();
 
     const [loggedIn, setLoggedIn] = React.useState(false);
+    const [isSuccess, setIsSuccess] = React.useState(false);
     
     const [currentUser, setCurrentUser] = React.useState({});
     const [cards, setCards] = React.useState([]);
@@ -78,21 +79,26 @@ function App() {
     function handleRegistration(data) {
         auth.register(data.password, data.email)
             .then((data) => {
-                setLoggedIn(true);
-                history.push("/");
+                history.push("/sign-in");
+                setIsSuccess(true);
+                handleTooltip();
             })
-            .catch((err) => console.log(err));        
+            .catch((err) => {
+                console.log(err);
+                setIsSuccess(false);
+                handleTooltip();
+             });               
     }
 
     function handleLogin(data){
         auth.login(data.password, data.email)
             .then((data) =>{
                 setLoggedIn(true);
-                localStorage.setItem('jwt', data.token);
-                handleTooltip();
+                localStorage.setItem('jwt', data.token); 
                 history.push("/");
             })
-            .catch((err) => console.log(err));       
+            .catch((err) => console.log(err)
+        );          
     }
 
     function handleCheckToken() {
@@ -266,8 +272,8 @@ return (
         />
         <InfoTooltip
             isOpen={isInfoTooltipOpen}
-            onClose={closeAllPopups} 
-        /> 
+            onClose={closeAllPopups}
+            isSuccess={isSuccess}        /> 
         </div>
     </CurrentUserContext.Provider>
   );
