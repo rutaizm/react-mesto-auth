@@ -21,7 +21,7 @@ function Login({onLogin}) {
         >
          <input
             type="Email"
-            value={inputValue.email}
+            value={inputValue.email || ''}
             onChange={handleInputsChanges}
             id="mail-input"
             name="email"
@@ -38,7 +38,7 @@ function Login({onLogin}) {
         </span>
         <input
             type="text"
-            value={inputValue.password}
+            value={inputValue.password || ''}
             onChange={handleInputsChanges}
             id="password-input"
             name="password"

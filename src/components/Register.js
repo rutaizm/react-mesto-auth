@@ -22,7 +22,7 @@ function Register({onRegistration}) {
         >
          <input
             type="Email"
-            value={inputValue.email}
+            value={inputValue.email || ''}
             onChange={handleInputsChanges}
             id="mail-input"
             name="email"
@@ -38,7 +38,7 @@ function Register({onRegistration}) {
         </span>
         <input
             type="text"
-            value={inputValue.password}
+            value={inputValue.password || ''}
             onChange={handleInputsChanges}
             id="password-input"
             name="password"

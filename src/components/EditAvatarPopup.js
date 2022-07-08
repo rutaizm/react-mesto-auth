@@ -38,7 +38,7 @@ function EditAvatarPopup ({isOpen, onClose, onUpdateAvatar, renderLoading}) {
                         id="avatar-input" 
                         onChange={handleInputsChanges} 
                         ref={srcAvatar} 
-                        value={inputValue.avatar} 
+                        value={inputValue.avatar || ''} 
                         name="avatar" 
                         placeholder="Ссылка на картинку" 
                         className={error.avatar ? 

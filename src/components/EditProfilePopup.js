@@ -35,7 +35,7 @@ function EditProfilePopup ({isOpen, onClose, onUpdateUser, renderLoading}) {
             buttonLoadText='Сохранение...'>
                     <input 
                         type="text" 
-                        value={inputValue.name} 
+                        value={inputValue.name || ''} 
                         onChange={handleInputsChanges} 
                         id="name-input" 
                         name="name" 
@@ -52,7 +52,7 @@ function EditProfilePopup ({isOpen, onClose, onUpdateUser, renderLoading}) {
                     </span>
                     <input 
                         type="text" 
-                        value={inputValue.about} 
+                        value={inputValue.about || ''} 
                         onChange={handleInputsChanges} 
                         id="job-input" 
                         name="about" 
