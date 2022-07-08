@@ -1,6 +1,10 @@
-.header {
+.header__open{
+
+}
+
+.header__open {
     max-width: 880px;
-    min-height: 119px;
+    min-height: 85px;
     display: flex;
     margin: auto;
     border-bottom: solid 1px rgba(84, 84, 84, .7);
@@ -9,25 +13,25 @@
 }
 
 @media screen and (min-width:880px) and (max-width:920px) {
-    .header {
+    .header__open {
         max-width: 770px;
         border-bottom: solid 1px rgba(84, 84, 84, .7);
     }
 }
 
 @media screen and (min-width:581px) and (max-width:879px) {
-    .header {
+    .header__open {
         max-width: 580px;
         min-width: 320px;
         min-height: 84px;
         border-bottom: solid 1px rgba(84, 84, 84, .7);
     }
 }
-/* 
+
 @media screen and (min-width:320px) and (max-width:580px) {
-    .header {
+    .header__open {
         flex-direction: column-reverse;
         align-items: center;
         border-bottom:none;
     }
-} */
+}

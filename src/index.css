@@ -9,6 +9,11 @@
 @import url(./blocks/header/__nav/header__nav.css);
 @import url(./blocks/header/__exit-button/header__exit-button.css);
 @import url(./blocks/header/__email/header__email.css);
+@import url(./blocks/header/__menu-button/header__menu-button.css);
+@import url(./blocks/header/__wrap/header__wrap.css);
+@import url(./blocks/header/__open/header__open.css);
+@import url(./blocks/header/__close-menu-button/header__close-menu-button.css);
+@import url(./blocks/header/__nav/_active/header__nav_active.css);
 
 @import url(./blocks/logo/logo.css);
 

@@ -97,8 +97,11 @@ function App() {
                 localStorage.setItem('jwt', data.token); 
                 history.push("/");
             })
-            .catch((err) => console.log(err)
-        );          
+            .catch((err) => {
+                console.log(err);
+                setIsSuccess(false);
+                handleTooltip();
+            });      
     }
 
     function handleCheckToken() {

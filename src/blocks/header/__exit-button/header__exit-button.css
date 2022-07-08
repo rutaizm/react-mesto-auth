@@ -5,7 +5,7 @@
     font-size: 18px;
     line-height: 22px;
     text-decoration: none;
-    border-color: none;
+    border: none;
     background-color: black;
     appearance: none;
     color: #A9A9A9;
@@ -16,4 +16,10 @@
 
 .header__exit-button:hover {
     opacity: .5;
+}
+
+@media screen and (min-width:320px) and (max-width:580px) {
+    .header__exit-button {
+       margin: 18px auto 35px;
+    }
 }

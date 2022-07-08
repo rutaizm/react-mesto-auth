@@ -20,3 +20,13 @@
     opacity: 0.8;
     cursor: pointer;
 }
+
+@media screen and (min-width:320px) and (max-width:580px) {
+    .signin__button {
+        width: 260px;
+        min-height: 46px;
+        font-size: 14px;
+        line-height: 17px;
+        margin-top: 144px;
+    }
+}

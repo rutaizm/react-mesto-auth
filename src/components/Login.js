@@ -29,6 +29,7 @@ function Login({onLogin}) {
             className={error.email ? 
                 "signin__field edit-form__field_type_error" : "signin__field"} 
             required 
+            autoComplete="off"
         />
         <span 
             className={error.email ?
@@ -47,6 +48,7 @@ function Login({onLogin}) {
             required
             minLength="2" 
             maxLength="40"
+            autoComplete="off"
         />  
         <span 
             className={error.password ?
