@@ -11,8 +11,8 @@
 @media screen and (min-width:320px) and (max-width:580px) {
     .header__menu-button {
         display: inline;
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 28px;
         border-style: none;
         background-color: rgba(0, 0, 0, 0);
         background-size: cover;
