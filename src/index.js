@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from '../src/components/App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import * as ReactDOMClient from 'react-dom/client';
 
 
@@ -19,9 +19,9 @@ import * as ReactDOMClient from 'react-dom/client';
 
 ReactDOM.render(
   <React.StrictMode>
-  <BrowserRouter>
+  <HashRouter>
     <App />
-  </BrowserRouter>  
+  </HashRouter>  
 </React.StrictMode>,
 document.getElementById('root')
 );
